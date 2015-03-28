@@ -1,0 +1,101 @@
+/**
+ * @author VaL Doroshchuk <valbok@gmail.com>
+ * @date Mar 2015
+ * @copyright Zbigniew Czech, George Havas, Bohdan S. Majewski, VaL Doroshchuk
+ * @license GNU GPL v2
+ * @package Mphf
+ */
+
+#include "Chm.hpp"
+#include <math.h>
+#include <cstring>
+#include <common/hashes/jenkins.hpp>
+#include <iostream>
+
+namespace NMphf {
+
+Chm::Chm(double factor) throw()
+    : mNodesCountFactor(factor)
+    , mGraph(0) 
+{
+    mHashSeeds[0] = mHashSeeds[1] = 0;
+}
+
+Chm::~Chm() 
+{
+    delete mGraph;
+}
+
+bool Chm::reset(const unsigned len) 
+{
+    if (mNodesCountFactor < 2) 
+    {
+        mNodesCountFactor = 2.09;
+    }
+
+    delete mGraph;
+    mGraph = new Graph(ceil(mNodesCountFactor * len));
+
+    return mGraph != 0;
+}
+
+void Chm::hashes(
+    const char* key, 
+    unsigned& firstNodeIndex, 
+    unsigned& secondNodeIndex) const 
+{
+    unsigned len = strlen(key);
+    firstNodeIndex = NHash::jenkins(mHashSeeds[0], key, len) % mGraph->getNodesCount();
+    secondNodeIndex = NHash::jenkins(mHashSeeds[1], key, len) % mGraph->getNodesCount();
+
+    if (firstNodeIndex == secondNodeIndex && 
+        ++secondNodeIndex >= mGraph->getNodesCount()) 
+    {
+        secondNodeIndex = 0;
+    }
+}
+
+bool Chm::generate(const char* keys[], const unsigned len) 
+{
+    bool result = false;
+    for (unsigned attempts = 0; attempts < 20; ++attempts) 
+    {
+        if (!reset(len)) 
+        {
+            break;
+        }
+
+        mHashSeeds[0] = rand() % mGraph->getNodesCount();
+        mHashSeeds[1] = rand() % mGraph->getNodesCount();
+        for (unsigned i = 0; i < len; ++i) 
+        {
+            unsigned firstNodeIndex, secondNodeIndex;
+            hashes(keys[i], firstNodeIndex, secondNodeIndex);
+            mGraph->connect(firstNodeIndex, secondNodeIndex);
+        }
+
+        // Checking for cycles.
+        if (!mGraph->isCyclic()) 
+        {
+            result = true;
+            break;
+        }
+    }
+
+    if (result) 
+    {
+        mGraph->calculateNodeValues();
+    }
+
+    return result;
+}
+
+bool Chm::search(const char* key, unsigned& result) const 
+{
+    unsigned firstNodeIndex, secondNodeIndex;
+    hashes(key, firstNodeIndex, secondNodeIndex);
+
+    return mGraph->getEdgeId(firstNodeIndex, secondNodeIndex, result);
+}
+
+} // namespace NMphf
