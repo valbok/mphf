@@ -27,7 +27,7 @@ Chm::~Chm()
     delete mGraph;
 }
 
-bool Chm::reset(const unsigned len)
+bool Chm::reset(unsigned len)
 {
     if (mNodesCountFactor < 2)
     {
@@ -56,7 +56,7 @@ void Chm::getNodeIndices(
     }
 }
 
-bool Chm::generate(const char* keys[], const unsigned len)
+bool Chm::generate(const char* keys[], unsigned len)
 {
     bool result = false;
     for (unsigned attempts = 0; attempts < 20; ++attempts)

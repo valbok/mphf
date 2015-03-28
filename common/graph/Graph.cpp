@@ -13,7 +13,7 @@
 namespace NMphf
 {
 
-Graph::Graph(const unsigned nodesCount) throw()
+Graph::Graph(unsigned nodesCount) throw()
     : mNodesCount(nodesCount)
     , mCreatedNodesCount(0)
 {
@@ -41,8 +41,8 @@ unsigned Graph::getEdgesCount() const
 }
 
 bool Graph::connect(
-    const unsigned firstNodeIndex,
-    const unsigned secondNodeIndex
+    unsigned firstNodeIndex,
+    unsigned secondNodeIndex
     )
 {
     if (firstNodeIndex >= mNodesCount ||
@@ -74,12 +74,12 @@ bool Graph::connect(
     return true;
 }
 
-Node* Graph::getNode(const unsigned index)
+Node* Graph::getNode(unsigned index)
 {
     return mNodes[index];
 }
 
-const Node* Graph::getNode(const unsigned index) const
+const Node* Graph::getNode(unsigned index) const
 {
     return mNodes[index];
 }
@@ -181,7 +181,7 @@ void Graph::calculateNodeValues()
 }
 
 void Graph::traverse(
-    const unsigned index,
+    unsigned index,
     std::vector<bool>& visitedNodes,
     unsigned& edgeId
     )

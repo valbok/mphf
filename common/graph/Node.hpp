@@ -31,7 +31,7 @@ public:
      *
      * @param Index of a node where this node can be fetched from.
      */
-    void connectTo(const unsigned index);
+    void connectTo(unsigned index);
 
     /**
      * Returns count of connected nodes.
@@ -43,7 +43,7 @@ public:
      *
      * @param Index of an edege.
      */
-    unsigned getNodeIndex(const unsigned edgeIndex) const;
+    unsigned getNodeIndex(unsigned edgeIndex) const;
 
     /**
      * Sets value of the node.
