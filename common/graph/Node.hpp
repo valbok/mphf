@@ -11,23 +11,23 @@
 
 #include <vector>
 
-namespace NMphf 
+namespace NMphf
 {
 
 /**
  * Graph's node with possibility to assign a value.
  */
-class Node 
+class Node
 {
 public:
-    
+
     /**
      * Default constructor
      */
     Node() throw();
 
     /**
-     * Connects or creates an edge with a node by its index. 
+     * Connects or creates an edge with a node by its index.
      *
      * @param Index of a node where this node can be fetched from.
      */

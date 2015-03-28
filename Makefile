@@ -18,7 +18,7 @@ CXXFLAGS += -g -Wall -Wextra -std=c++0x -I.
 
 # All tests produced by this Makefile. Remember to add new tests you
 # created to the list.
-TARGETS = $(BUILD_DIR)/NodeTest $(BUILD_DIR)/GraphTest $(BUILD_DIR)/ChmTest 
+TARGETS = $(BUILD_DIR)/NodeTest $(BUILD_DIR)/GraphTest $(BUILD_DIR)/ChmTest
 # HEngine_s_test HEngine_sn_test HEngine_sn_dict_test query duplicates matches
 
 # All Google Test headers.  Usually you shouldn't change this
@@ -67,7 +67,7 @@ $(BUILD_DIR)/node.o : common/graph/Node.cpp common/graph/Node.hpp
 $(BUILD_DIR)/graph.o : common/graph/Graph.cpp common/graph/Graph.hpp
 	$(CXX) $(CXXFLAGS) -c common/graph/Graph.cpp -o $@
 
-$(BUILD_DIR)/jenkins.o : common/hashes/jenkins.cpp common/hashes/jenkins.hpp 
+$(BUILD_DIR)/jenkins.o : common/hashes/jenkins.cpp common/hashes/jenkins.hpp
 	$(CXX) $(CXXFLAGS) -c common/hashes/jenkins.cpp -o $@
 
 $(BUILD_DIR)/Chm.o : kernel/chm/Chm.cpp kernel/chm/Chm.hpp
@@ -78,7 +78,7 @@ $(BUILD_DIR)/ChmTest.o : kernel/chm/tests/ChmTest.cpp \
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c kernel/chm/tests/ChmTest.cpp -o $@
 
 $(BUILD_DIR)/ChmTest : $(BUILD_DIR)/node.o $(BUILD_DIR)/graph.o $(BUILD_DIR)/jenkins.o $(BUILD_DIR)/Chm.o $(BUILD_DIR)/ChmTest.o \
-					$(BUILD_DIR)/gtest_main.a 
+					$(BUILD_DIR)/gtest_main.a
 	$(CXX) -lpthread $(CPPFLAGS) $(CXXFLAGS) -pthread $^ -o $@
 
 $(BUILD_DIR)/GraphTest.o : common/graph/tests/GraphTest.cpp \
@@ -86,7 +86,7 @@ $(BUILD_DIR)/GraphTest.o : common/graph/tests/GraphTest.cpp \
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c common/graph/tests/GraphTest.cpp -o $@
 
 $(BUILD_DIR)/GraphTest : $(BUILD_DIR)/node.o $(BUILD_DIR)/graph.o $(BUILD_DIR)/GraphTest.o \
-					$(BUILD_DIR)/gtest_main.a 
+					$(BUILD_DIR)/gtest_main.a
 	$(CXX) -lpthread $(CPPFLAGS) $(CXXFLAGS) -pthread $^ -o $@
 
 $(BUILD_DIR)/NodeTest.o : common/graph/tests/NodeTest.cpp \
@@ -94,5 +94,5 @@ $(BUILD_DIR)/NodeTest.o : common/graph/tests/NodeTest.cpp \
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c common/graph/tests/NodeTest.cpp -o $@
 
 $(BUILD_DIR)/NodeTest : $(BUILD_DIR)/node.o $(BUILD_DIR)/NodeTest.o \
-					$(BUILD_DIR)/gtest_main.a 
+					$(BUILD_DIR)/gtest_main.a
 	$(CXX) -lpthread $(CPPFLAGS) $(CXXFLAGS) -pthread $^ -o $@

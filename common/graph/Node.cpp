@@ -8,34 +8,34 @@
 
 #include "Node.hpp"
 
-namespace NMphf 
+namespace NMphf
 {
 
-Node::Node() throw() : mValue(0) 
+Node::Node() throw() : mValue(0)
 {
 }
 
-void Node::connectTo(const unsigned index) 
+void Node::connectTo(const unsigned index)
 {
     mEdges.push_back(index);
 }
 
-unsigned Node::getEdgesCount() const 
+unsigned Node::getEdgesCount() const
 {
     return mEdges.size();
 }
 
-unsigned Node::getNodeIndex(const unsigned edgeIndex) const 
+unsigned Node::getNodeIndex(const unsigned edgeIndex) const
 {
     return mEdges[edgeIndex];
 }
 
-void Node::setValue(unsigned value) 
+void Node::setValue(unsigned value)
 {
     mValue = value;
 }
 
-unsigned Node::getValue() const 
+unsigned Node::getValue() const
 {
     return mValue;
 }

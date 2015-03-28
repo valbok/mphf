@@ -11,16 +11,16 @@
 
 #include "Node.hpp"
 
-namespace NMphf 
+namespace NMphf
 {
 
 /**
- * Graph implementation with fixed size of nodes or verticies.
+ * Graph implementation with fixed size of nodes.
  */
-class Graph 
+class Graph
 {
 public:
-    
+
     /**
      * Default constructor.
      * @param Fixed size of current graph.
@@ -66,13 +66,13 @@ public:
     bool isCyclic() const;
 
     /**
-     * Traverse the graph and calculates values of the nodes 
-     * to provide an ability to translate key to unique id.
+     * Traverses the graph and calculates values of the nodes
+     * to provide an ability to translate keys to unique ids.
      */
     void calculateNodeValues();
 
     /**
-     * Returns unique edge id between node 
+     * Returns unique edge id between node
      * from \a firstNodeIndex and \a secondNodeIndex.
      *
      * @param Index of a first node.
@@ -80,8 +80,8 @@ public:
      * @return false In case of errors.
      */
     unsigned getEdgeId(
-        unsigned firstNodeIndex, 
-        unsigned secondNodeIndex, 
+        unsigned firstNodeIndex,
+        unsigned secondNodeIndex,
         unsigned& result
         );
 
@@ -105,27 +105,27 @@ private:
     /**
      * Array of pointers to nodes.
      */
-    Node** mNodes;    
+    Node** mNodes;
 
     /**
      * Traverses the graph and assignes a value to each node.
      *
      * @param Index of a node.
-     * @param Checks which node has been visited.  
+     * @param Checks which node has been visited.
      * @param Unique edge id.
      */
     void traverse(unsigned index, std::vector<bool>& visitedNodes, unsigned& edgeId);
-    
+
     /**
      * To check for cycles in graph tries to delete a node with degree 1.
      *
      * @param Index of a node.
-     * @param Checks which node has been visited.  
+     * @param Checks which node has been visited.
      * @param Calculates how many nodes with degree 1 have been removed.
      */
     bool deleteLeafNodes(
         unsigned index,
-        std::vector<bool>& visitedNodes, 
+        std::vector<bool>& visitedNodes,
         unsigned& deletedNodesCount
         ) const;
 };
