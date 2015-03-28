@@ -7,8 +7,10 @@ Since no collisions occur each item can be retrieved from the table in a single 
 
 A minimal perfect hash function is a perfect hash function that maps n keys to n consecutive integers. 
 
-CHM implementation
-**************************************
+**********
+CHM
+===
+
 An optimal algorithm for generating minimal perfect hash functions based on random graphs.
 
 The algorithm is probabilistic, involving generation of random graphs.
@@ -19,3 +21,9 @@ It runs very fast in practice.
 - Construct minimal MPHFs in linear time. 
 - It is based on acyclic random graphs 
 - The resulting MPHFs are order preserving.
+
+Build
+===
+
+    $ mkdir build; make
+    $ ./build/ChmTest
