@@ -55,6 +55,12 @@ public:
 private:
 
     /**
+     * Prevents copying.
+     */
+    Chm(const Chm&);
+    Chm& operator=(const Chm&);
+
+    /**
      * Resets state of the object.
      *
      * @param New length of submitted array.

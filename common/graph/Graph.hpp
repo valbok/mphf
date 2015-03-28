@@ -88,6 +88,12 @@ public:
 private:
 
     /**
+     * Prevents copying.
+     */
+    Graph(const Graph&);
+    Graph& operator=(const Graph&);
+
+    /**
      * The size of graph. Total count of requested nodes.
      */
     unsigned mNodesCount;
