@@ -6,6 +6,7 @@ A perfect hash function is a hash function that maps distinct elements to a set 
 Since no collisions occur each item can be retrieved from the table in a single probe.
 
 A minimal perfect hash function is a perfect hash function that maps n keys to n consecutive integers. 
+Minimal perfect hash functions are widely used for memory efficient storage and fast retrieval of items from static sets.
 
 **********
 CHM
