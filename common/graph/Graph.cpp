@@ -26,6 +26,8 @@ Graph::~Graph()
     {
         delete mNodes[i];
     }
+
+    delete mNodes;
 }
 
 unsigned Graph::getNodesCount() const
@@ -84,7 +86,7 @@ const Node* Graph::getNode(const unsigned index) const
 
 bool Graph::isCyclic() const
 {
-    // If empty graph means is acyclic.
+    // If empty graph means it is acyclic.
     if (mCreatedNodesCount == 0)
     {
         return false;
@@ -160,7 +162,7 @@ void Graph::calculateNodeValues()
 {
     std::vector<bool> visitedNodes;
     visitedNodes.reserve(getNodesCount());
-    // Each edge will have an unigue id to avoid any collisions.
+    // Each edge will have an unigue id to avoid collisions.
     unsigned edgeId = 0;
     for (unsigned i = 0; i < getNodesCount(); ++i)
     {
@@ -181,9 +183,11 @@ void Graph::calculateNodeValues()
 void Graph::traverse(
     const unsigned index,
     std::vector<bool>& visitedNodes,
-    unsigned& edgeId)
+    unsigned& edgeId
+    )
 {
     visitedNodes[index] = true;
+
     Node* node = getNode(index);
     if (node == 0)
     {
@@ -211,8 +215,8 @@ void Graph::traverse(
 }
 
 unsigned Graph::getEdgeId(
-    const unsigned firstNodeIndex,
-    const unsigned secondNodeIndex,
+    unsigned firstNodeIndex,
+    unsigned secondNodeIndex,
     unsigned& result)
 {
     Node* firstNode = firstNodeIndex < mNodesCount ? getNode(firstNodeIndex) : 0;
