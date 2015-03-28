@@ -27,7 +27,7 @@ Graph::~Graph()
         delete mNodes[i];
     }
 
-    delete mNodes;
+    delete [] mNodes;
 }
 
 unsigned Graph::getNodesCount() const
