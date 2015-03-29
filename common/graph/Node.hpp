@@ -1,7 +1,7 @@
 /**
  * @author VaL Doroshchuk <valbok@gmail.com>
  * @date Mar 2015
- * @copyright Zbigniew Czech, George Havas, Bohdan S. Majewski, VaL Doroshchuk
+ * @copyright VaL Doroshchuk
  * @license GNU GPL v2
  * @package Mphf
  */
@@ -66,7 +66,7 @@ private:
     Node& operator=(const Node&);
 
     /**
-     * An array of edges. Stores index of nodes
+     * An array of edges. Stores ids or indices of connected nodes.
      */
     std::vector<unsigned> mEdges;
 

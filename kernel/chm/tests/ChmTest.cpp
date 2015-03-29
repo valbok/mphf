@@ -52,12 +52,12 @@ TEST(Chm, testRandomList)
         "abcdefghijklmnopqrstuvwxyz";
 
     Chm chm;
-    const unsigned len = 8800;
+    const unsigned len = 100000;
     char* list[len];
 
     for (unsigned i = 0; i < len; ++i)
     {
-        unsigned ll = (rand() % 11) + 4;
+        unsigned ll = (rand() % 11) + 6;
         list[i] = new char[ll];
         for (unsigned j = 0; j < ll - 1; ++j)
         {

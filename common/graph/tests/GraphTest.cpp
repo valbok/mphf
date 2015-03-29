@@ -40,3 +40,31 @@ TEST(Graph, connect)
     EXPECT_TRUE(g.getNode(2) != 0);
     EXPECT_TRUE(g.getNode(3) == 0);
 }
+
+TEST(Graph, isCyclic) 
+{
+    {
+        Graph g(4);
+        
+        EXPECT_TRUE(g.connect(0, 1));
+        EXPECT_FALSE(g.isCyclic());
+        EXPECT_TRUE(g.connect(1, 2));
+        EXPECT_FALSE(g.isCyclic());
+        EXPECT_TRUE(g.connect(2, 0));
+        EXPECT_TRUE(g.isCyclic());
+        EXPECT_TRUE(g.connect(2, 3));
+        EXPECT_TRUE(g.isCyclic());
+    }
+
+    {
+        Graph g(4);
+        
+        EXPECT_TRUE(g.connect(0, 1));
+        EXPECT_TRUE(g.connect(1, 2));
+        EXPECT_TRUE(g.connect(2, 3));
+
+        EXPECT_FALSE(g.isCyclic());
+        EXPECT_TRUE(g.connect(2, 1));
+        EXPECT_TRUE(g.isCyclic());
+    }
+}
