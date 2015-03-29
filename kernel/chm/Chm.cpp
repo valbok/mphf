@@ -43,7 +43,8 @@ bool Chm::reset(unsigned len)
 void Chm::getNodeIndices(
     const char* key,
     unsigned& firstNodeIndex,
-    unsigned& secondNodeIndex) const
+    unsigned& secondNodeIndex
+    ) const
 {
     unsigned len = strlen(key);
     firstNodeIndex = NHash::jenkins(mHashSeeds[0], key, len) % mGraph->getNodesCount();
@@ -59,7 +60,7 @@ void Chm::getNodeIndices(
 bool Chm::generate(const char* keys[], unsigned len)
 {
     bool result = false;
-    for (unsigned attempts = 0; !result && reset(len) && attempts < 20; ++attempts)
+    for (unsigned attempt = 0; !result && reset(len) && attempt < 20; ++attempt)
     {
         mHashSeeds[0] = rand() % mGraph->getNodesCount();
         mHashSeeds[1] = rand() % mGraph->getNodesCount();
