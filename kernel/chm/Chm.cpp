@@ -59,13 +59,8 @@ void Chm::getNodeIndices(
 bool Chm::generate(const char* keys[], unsigned len)
 {
     bool result = false;
-    for (unsigned attempts = 0; attempts < 20; ++attempts)
+    for (unsigned attempts = 0; !result && reset(len) && attempts < 20; ++attempts)
     {
-        if (!reset(len))
-        {
-            break;
-        }
-
         mHashSeeds[0] = rand() % mGraph->getNodesCount();
         mHashSeeds[1] = rand() % mGraph->getNodesCount();
         for (unsigned i = 0; i < len; ++i)
@@ -75,12 +70,7 @@ bool Chm::generate(const char* keys[], unsigned len)
             mGraph->connect(firstNodeIndex, secondNodeIndex);
         }
 
-        // Checking for cycles.
-        if (!mGraph->isCyclic())
-        {
-            result = true;
-            break;
-        }
+        result = !mGraph->isCyclic();
     }
 
     if (result)

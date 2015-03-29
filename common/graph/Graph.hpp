@@ -79,7 +79,7 @@ public:
      * @param Index of a second node.
      * @return false In case of errors.
      */
-    unsigned getEdgeId(
+    bool getEdgeId(
         unsigned firstNodeIndex,
         unsigned secondNodeIndex,
         unsigned& result

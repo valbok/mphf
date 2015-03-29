@@ -174,7 +174,6 @@ void Graph::calculateNodeValues()
         Node* node = getNode(i);
         if (node != 0 && !visitedNodes.at(i))
         {
-            node->setValue(0);
             traverse(i, visitedNodes, edgeId);
         }
     }
@@ -214,7 +213,7 @@ void Graph::traverse(
     }
 }
 
-unsigned Graph::getEdgeId(
+bool Graph::getEdgeId(
     unsigned firstNodeIndex,
     unsigned secondNodeIndex,
     unsigned& result)
