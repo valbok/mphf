@@ -12,6 +12,7 @@ Minimal perfect hash functions are widely used for memory efficient storage and 
 CHM
 ===
 Overview of the algorithm: http://habrahabr.ru/post/254431
+
 An optimal algorithm for generating minimal perfect hash functions based on random graphs.
 
 The algorithm is probabilistic, involving generation of random graphs.
