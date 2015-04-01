@@ -21,7 +21,7 @@ Node::Node() throw()
     mEdges = new unsigned[mEdgesCapacity];
 }
 
-void Node::resize()
+inline void Node::resize()
 {
     if (mEdgesCount < mEdgesCapacity)
     {
@@ -47,8 +47,7 @@ void Node::connectTo(unsigned index)
 {
     resize();
 
-    mEdges[mEdgesCount] = index;
-    ++mEdgesCount;
+    mEdges[mEdgesCount++] = index;
 }
 
 unsigned Node::getEdgesCount() const

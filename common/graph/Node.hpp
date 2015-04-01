@@ -67,7 +67,7 @@ private:
     /**
      * Resizes array of edges.
      */
-    void resize();
+    inline void resize();
 
     /**
      * An array of edges. Stores ids or indices of connected nodes.
