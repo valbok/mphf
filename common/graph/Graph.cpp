@@ -7,8 +7,8 @@
  */
 
 #include "Graph.hpp"
-#include <vector>
 #include <iostream>
+#include <cstring> // memset
 
 namespace NMphf
 {
@@ -92,17 +92,13 @@ bool Graph::isCyclic() const
         return false;
     }
 
-    std::vector<bool> visitedNodes;
-    visitedNodes.reserve(getNodesCount());
-
+    bool visitedNodes[mNodesCount];
+    memset(&visitedNodes, false, mNodesCount);
+    
     // Total deleted leaf nodes.
     unsigned deletedNodesCount = 0;
-    for (unsigned i = 0; i < getNodesCount(); ++i)
+    for (unsigned i = 0; i < mNodesCount; ++i)
     {
-        if (visitedNodes.size() <= i)
-        {
-            visitedNodes.push_back(false);
-        }
         deleteLeafNodes(i, visitedNodes, deletedNodesCount);
     }
 
@@ -111,12 +107,12 @@ bool Graph::isCyclic() const
 
 bool Graph::deleteLeafNodes(
     unsigned index,
-    std::vector<bool>& visitedNodes,
+    bool visitedNodes[],
     unsigned& deletedNodesCount
     ) const
 {
     const Node* node = getNode(index);
-    if (node == 0 || visitedNodes.at(index))
+    if (node == 0 || visitedNodes[index])
     {
         return false;
     }
@@ -128,12 +124,7 @@ bool Graph::deleteLeafNodes(
     for (unsigned i = 0; i < node->getEdgesCount(); ++i)
     {
         unsigned nextNodeIndex = node->getNodeIndex(i);
-        while (visitedNodes.size() <= nextNodeIndex)
-        {
-            visitedNodes.push_back(false);
-        }
-
-        if (visitedNodes.at(nextNodeIndex))
+        if (visitedNodes[nextNodeIndex])
         {
             continue;
         }
@@ -160,19 +151,15 @@ bool Graph::deleteLeafNodes(
 
 void Graph::calculateNodeValues()
 {
-    std::vector<bool> visitedNodes;
-    visitedNodes.reserve(getNodesCount());
+    bool visitedNodes[mNodesCount];
+    memset(&visitedNodes, false, mNodesCount);
+
     // Each edge will have an unigue id to avoid collisions.
     unsigned edgeId = 0;
     for (unsigned i = 0; i < getNodesCount(); ++i)
     {
-        if (visitedNodes.size() <= i)
-        {
-            visitedNodes.push_back(false);
-        }
-
         Node* node = getNode(i);
-        if (node != 0 && !visitedNodes.at(i))
+        if (node != 0 && !visitedNodes[i])
         {
             traverse(i, visitedNodes, edgeId);
         }
@@ -181,7 +168,7 @@ void Graph::calculateNodeValues()
 
 void Graph::traverse(
     unsigned index,
-    std::vector<bool>& visitedNodes,
+    bool visitedNodes[],
     unsigned& edgeId
     )
 {
@@ -196,13 +183,9 @@ void Graph::traverse(
     for (unsigned i = 0; i < node->getEdgesCount(); ++i)
     {
         unsigned nextNodeIndex = node->getNodeIndex(i);
-        while (visitedNodes.size() <= nextNodeIndex)
-        {
-            visitedNodes.push_back(false);
-        }
 
         Node* nextNode = getNode(nextNodeIndex);
-        if (nextNode == 0 || visitedNodes.at(nextNodeIndex))
+        if (nextNode == 0 || visitedNodes[nextNodeIndex])
         {
             continue;
         }

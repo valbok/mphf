@@ -9,8 +9,6 @@
 #ifndef MPHF_COMMON_NODE
 #define MPHF_COMMON_NODE
 
-#include <vector>
-
 namespace NMphf
 {
 
@@ -25,6 +23,7 @@ public:
      * Default constructor
      */
     Node() throw();
+    ~Node();
 
     /**
      * Connects or creates an edge with a node by its index.
@@ -50,12 +49,12 @@ public:
      *
      * @param Value of the node.
      */
-    void setValue(unsigned value);
+    void setValue(int value);
 
     /**
      * Returns stored value.
      */
-    unsigned getValue() const;
+    int getValue() const;
 
 private:
 
@@ -66,14 +65,29 @@ private:
     Node& operator=(const Node&);
 
     /**
+     * Resizes array of edges.
+     */
+    void resize();
+
+    /**
      * An array of edges. Stores ids or indices of connected nodes.
      */
-    std::vector<unsigned> mEdges;
+    unsigned* mEdges;
+    
+    /**
+     * Count of stored edges.
+     */
+    unsigned mEdgesCount;
 
     /**
      * Node's value.
      */
     unsigned mValue;
+
+    /**
+     * Capacity of reserved items in an array.
+     */
+    unsigned mEdgesCapacity;
 };
 
 } // namespace NMphf

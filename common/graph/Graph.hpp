@@ -120,7 +120,11 @@ private:
      * @param Checks which node has been visited.
      * @param Unique edge id.
      */
-    void traverse(unsigned index, std::vector<bool>& visitedNodes, unsigned& edgeId);
+    void traverse(
+        unsigned index,
+        bool visitedNodes[],
+        unsigned& edgeId
+        );
 
     /**
      * To check for cycles in graph tries to delete a node with degree 1.
@@ -131,7 +135,7 @@ private:
      */
     bool deleteLeafNodes(
         unsigned index,
-        std::vector<bool>& visitedNodes,
+        bool visitedNodes[],
         unsigned& deletedNodesCount
         ) const;
 };
