@@ -9,7 +9,7 @@ A minimal perfect hash function is a perfect hash function that maps n keys to n
 Minimal perfect hash functions are widely used for memory efficient storage and fast retrieval of items from static sets.
 
 **********
-CHM
+CHM - http://habrahabr.ru/post/254431/ - Overview of the algorithm.
 ===
 
 An optimal algorithm for generating minimal perfect hash functions based on random graphs.
