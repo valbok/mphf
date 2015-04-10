@@ -19,7 +19,6 @@ CXXFLAGS += -g -Wall -Wextra -std=c++0x -I.
 # All tests produced by this Makefile. Remember to add new tests you
 # created to the list.
 TARGETS = $(BUILD_DIR)/NodeTest $(BUILD_DIR)/GraphTest $(BUILD_DIR)/ChmTest
-# HEngine_s_test HEngine_sn_test HEngine_sn_dict_test query duplicates matches
 
 # All Google Test headers.  Usually you shouldn't change this
 # definition.
